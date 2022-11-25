@@ -5,7 +5,7 @@ const AdvertisedItems = () => {
         <div className='my-10'>
           <p className='text-3xl text-secondary font-semibold'>Available Bikes</p> 
           <div className="overflow-x-auto">
-  <table className="table w-full">
+  <table className="table w-full ">
     
     <thead>
       <tr>
