@@ -25,8 +25,8 @@ const Categories = () => {
     ]
 
     return (
-        <div className='my-5'>
-            <p className='text-3xl' >Product Categories</p>
+        <div className='my-10'>
+            <p className='text-3xl text-center font-semibold text-secondary' >Product Categories</p>
            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-2'>
            {
                 categoriesData.map(brand=><Category 
