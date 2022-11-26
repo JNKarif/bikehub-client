@@ -1,17 +1,126 @@
-[
+
+ 
+
+
+    [
+
     {
-        "category_id": 1,
-       "cateogoryName": "Honda",
-        "categoryLogo": "https://www.logo.wine/a/logo/Honda_Motorcycle_and_Scooter_India/Honda_Motorcycle_and_Scooter_India-Logo.wine.svg"
+        "category_id":1,
+        "name": "Honda Ex-Motion",
+        "image": "Honda Ex-Motion",
+        "location": "Agrabad, CTG",
+        "original_price": 500000,
+        "resell_price": 400000,
+        "years_of_use": 3,
+        "posting_time": "03.10.22",
+        "seller_name": "Habib"
+
+
     },
     {
-        "category_id": 2,
-       "cateogoryName": "Yamaha",
-        "categoryLogo":"https://www.logo.wine/a/logo/Yamaha_Motor_Company/Yamaha_Motor_Company-Logo.wine.svg"
+        "category_id":1,
+        "name": "Honda CBR",
+        "image": "Honda Ex-Motion",
+        "location": "GEC, CTG",
+        "original_price": 450000,
+        "resell_price": 420000,
+        "years_of_use": 1,
+        "posting_time": "01.11.22",
+        "seller_name": "Arif"
+
+
+    },
+     {
+        "category_id":1,
+        "name": "Honda CBR Repsol",
+        "image": "Honda Ex-Motion",
+        "location": "Gulshan, Dhaka",
+        "original_price": 550000,
+        "resell_price": 510000,
+        "years_of_use": 2,
+        "posting_time": "10.10.22",
+        "seller_name": "Ratul"
+
+
     },
     {
-        "category_id": 3,
-       "cateogoryName": "Suzuki",
-        "categoryLogo": "https://www.logo.wine/a/logo/Suzuki/Suzuki-Logo.wine.svg"
+        "category_id":2,
+        "name": "Yamaha R15 V3 Indo",
+        "image": "Honda Ex-Motion",
+        "location": "Agrabad, CTG",
+        "original_price": 500000,
+        "resell_price": 400000,
+        "years_of_use": 3,
+        "posting_time": "03.10.22",
+        "seller_name": "Habib"
+
+
+    },
+    {
+        "category_id":2,
+        "name": "Yamaha R15 V3 Indian",
+        "image": "Honda Ex-Motion",
+        "location": "GEC, CTG",
+        "original_price": 450000,
+        "resell_price": 420000,
+        "years_of_use": 1,
+        "posting_time": "01.11.22",
+        "seller_name": "Arif"
+
+
+    },
+     {
+        "category_id":2,
+        "name": "Yamaha R15 V4",
+        "image": "Honda Ex-Motion",
+        "location": "Gulshan, Dhaka",
+        "original_price": 550000,
+        "resell_price": 510000,
+        "years_of_use": 2,
+        "posting_time": "10.10.22",
+        "seller_name": "Ratul"
+
+
+    },
+    {
+        "category_id":3,
+        "name": "Suzuki GSX-R",
+        "image": "Honda Ex-Motion",
+        "location": "Agrabad, CTG",
+        "original_price": 500000,
+        "resell_price": 400000,
+        "years_of_use": 3,
+        "posting_time": "03.10.22",
+        "seller_name": "Habib"
+
+
+    },
+    {
+        "category_id":3,
+        "name": "Suzuki SF",
+        "image": "Honda Ex-Motion",
+        "location": "GEC, CTG",
+        "original_price": 450000,
+        "resell_price": 420000,
+        "years_of_use": 1,
+        "posting_time": "01.11.22",
+        "seller_name": "Arif"
+
+
+    },
+     {
+        "category_id":3,
+        "image": "Suzuki XSR",
+        "location": "Gulshan, Dhaka",
+        "original_price": 550000,
+        "resell_price": 510000,
+        "years_of_use": 2,
+        "posting_time": "10.10.22",
+        "seller_name": "Ratul"
+
+
     }
-]
+
+    ]
+
+
