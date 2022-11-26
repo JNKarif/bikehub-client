@@ -1,0 +1,17 @@
+[
+    {
+        "category_id": 1,
+       "cateogoryName": "Honda",
+        "categoryLogo": "https://www.logo.wine/a/logo/Honda_Motorcycle_and_Scooter_India/Honda_Motorcycle_and_Scooter_India-Logo.wine.svg"
+    },
+    {
+        "category_id": 2,
+       "cateogoryName": "Yamaha",
+        "categoryLogo":"https://www.logo.wine/a/logo/Yamaha_Motor_Company/Yamaha_Motor_Company-Logo.wine.svg"
+    },
+    {
+        "category_id": 3,
+       "cateogoryName": "Suzuki",
+        "categoryLogo": "https://www.logo.wine/a/logo/Suzuki/Suzuki-Logo.wine.svg"
+    }
+]
