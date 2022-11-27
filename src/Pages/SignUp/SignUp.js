@@ -1,22 +1,26 @@
 import { toast } from 'react-hot-toast';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 import Loading from '../Loading/Loading';
-import { signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider } from 'firebase/auth';
+import useToken from '../../Hooks/useToken';
+
 
 
 const SignUp = () => {
-    const { createSeller, updateUser, loading, googleProvider } = useContext(AuthContext);
-    const navigate= useNavigate()
+    const { createSeller, updateUser, loading, providerLogin } = useContext(AuthContext);
+    
+    const [createdUserEmail, setCreatedUserEmail]=useState('')
+    const [token]=useToken(createdUserEmail)
+    const navigate = useNavigate()
 
-   
-    // const handleGoogleSignUp= () =>{
-    //     return signInWithPopup(auth, googleProvider)
 
-    // }
+    if(token){
+        navigate('/')
+    }
 
-   
+
     const handleSignUp = event => {
         event.preventDefault()
         const form = event.target;
@@ -24,28 +28,62 @@ const SignUp = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-if(loading){
-    return <Loading></Loading>
-}
+        if (loading) {
+            return <Loading></Loading>
+        }
 
-        createSeller( email, password)
-        .then(result=>{
-            const user= result.user;
-            console.log(user);
-            toast('User created successfully')
-            const userInfo ={
-                displayName: userName
-            }
-            updateUser(userInfo)
-            .then(()=>{
-                navigate('/')
+        createSeller(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast('User created successfully')
+                const userInfo = {
+                    displayName: userName
+                }
+                updateUser(userInfo)
+                    .then(() => {
+                        saveUser(userName, email)
+                    })
+                    .catch(err => console.error(err))
             })
-            .catch(err=>console.error(err))
-        })
-        .catch(error=> console.error(error))
+            .catch(error => console.error(error))
 
         // console.log(email, password, userName)
     }
+
+
+    const saveUser = (userName, email) => {
+        const user = { userName, email };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setCreatedUserEmail(email)
+            })
+    }
+
+    const googleProvider = new GoogleAuthProvider()
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                saveUser(user.displayName, user.email)
+                setCreatedUserEmail(user.email)
+                // navigate('/')
+            })
+            .catch(err => console.error(err))
+    }
+
+    // get JWT in client side
+   
 
     return (
         <div className='flex justify-center my-10'>
@@ -71,15 +109,16 @@ if(loading){
                         <input name='password' type="password" placeholder="password" required className="input input-bordered" />
 
                     </div>
-                    
+
                     <p> Already have an account? <Link to='/login' className='text-primary'>Login</Link></p>
 
                     <div className="form-control mt-6">
-                        <button className="btn btn-primary">Sign Up</button>
+                        <button className="btn btn-primary mb-3">Sign Up</button>
+                        <button onClick={handleGoogleSignIn} className="btn btn-primary">Continue With Googles</button>
                     </div>
                 </div>
             </form>
-            
+
         </div>
     );
 };

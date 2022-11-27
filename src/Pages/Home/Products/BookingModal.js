@@ -21,7 +21,7 @@ const BookingModal = ({ bikeModel, setBikeModel }) => {
             buyer: nameUser,
             buyerLocation: location,
             buyerPhone: number,
-            buyerEmail: emailUser,
+            email: emailUser,
             price: bookedPrice,
             bookingDate: new Date()
         }

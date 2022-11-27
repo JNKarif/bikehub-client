@@ -7,7 +7,7 @@ import Loading from '../Loading/Loading';
 
 const Login = () => {
 
-    const { login, providerLogin,loading } = useContext(AuthContext)
+    const { login, loading } = useContext(AuthContext)
     const location =useLocation()
     const navigate = useNavigate()
 
@@ -34,16 +34,8 @@ if(loading){
 
     }
 
-    const googleProvider = new GoogleAuthProvider()
-
-    const handleGoogleSignIn = () => {
-        providerLogin(googleProvider)
-            .then(result => {
-                const user = result.user;
-                console.log(user)
-            })
-            .catch(err => console.error(err))
-    }
+    
+   
 
     return (
 
@@ -67,7 +59,7 @@ if(loading){
                     <p> New to Bike Hub ? <Link to='/signup' className='text-primary'>Sign Up</Link> </p>
                     <div className="form-control mt-6">
                         <button className="btn btn-primary mb-3">Login</button>
-                        <button onClick={handleGoogleSignIn} className="btn btn-primary">Login with Google</button>
+                        
                     </div>
 
                 </div>

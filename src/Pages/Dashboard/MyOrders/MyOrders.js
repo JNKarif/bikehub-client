@@ -10,7 +10,11 @@ const MyOrders = () => {
     const { data: bookings = [] } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(url);
+            const res = await fetch(url, {
+                headers:{
+                    authorization:`bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data
         }
@@ -18,7 +22,15 @@ const MyOrders = () => {
 
     return (
         <div>
-            <p className='text-3xl my-3'>My Orders</p>
+            <div className='flex flex-row justify-between'>
+                <p className='text-3xl my-3'>My Orders</p>
+                <p className='text-xl text-secondary my-3'>Buyer: {user?.displayName}</p>
+                {/* <div className="avatar">
+                    <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <img src={user?.photoURL} alt='' />
+                    </div>
+                </div> */}
+            </div>
 
             <div className="overflow-x-auto ">
                 <table className="table  w-full">
@@ -34,20 +46,20 @@ const MyOrders = () => {
                     </thead>
                     <tbody>
 
-                       {
+                        {
 
-                        bookings.map((booking, i)=> <tr
-                        key={booking._id}
-                        >
-                            <th>{i+1}</th>
-                            <td>{booking.bike}</td>
-                            <td>{booking.price}</td>
-                            <td>{booking.bookingDate}</td>
-                            <td>Blue</td>
-                        </tr>)
-                       }
+                            bookings.map((booking, i) => <tr
+                                key={booking._id}
+                            >
+                                <th>{i + 1}</th>
+                                <td>{booking.bike}</td>
+                                <td>{booking.price}</td>
+                                <td>{booking.bookingDate}</td>
+                                <td>Blue</td>
+                            </tr>)
+                        }
 
-                       
+
                     </tbody>
                 </table>
             </div>

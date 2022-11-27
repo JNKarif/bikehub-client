@@ -3,8 +3,6 @@ import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Blog from "../../Pages/Blog/Blog";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
-
-import MyProducts from "../../Pages/Dashboard/MyOrders/MyOrders";
 import Home from "../../Pages/Home/Home/Home";
 import PageNotFound from "../../Pages/Home/PageNotFound/PageNotFound";
 import Products from "../../Pages/Home/Products/Products";
