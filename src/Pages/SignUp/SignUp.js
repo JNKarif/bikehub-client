@@ -1,15 +1,16 @@
 import { toast } from 'react-hot-toast';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const SignUp = () => {
-    const { createSeller, updateUser } = useContext(AuthContext)
+    const { createSeller, updateUser } = useContext(AuthContext);
+    const navigate= useNavigate()
 
     const handleSignUp = event => {
         event.preventDefault()
         const form = event.target;
-        const name = form.name.value;
+        const userName = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
 
@@ -19,15 +20,17 @@ const SignUp = () => {
             console.log(user);
             toast('User created successfully')
             const userInfo ={
-                displayName: name
+                displayName: userName
             }
             updateUser(userInfo)
-            .then(()=>{})
+            .then(()=>{
+                navigate('/')
+            })
             .catch(err=>console.error(err))
         })
         .catch(error=> console.error(error))
 
-        // console.log(email, password, name)
+        // console.log(email, password, userName)
     }
 
     return (
