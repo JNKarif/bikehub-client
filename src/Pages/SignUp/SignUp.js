@@ -2,10 +2,11 @@ import { toast } from 'react-hot-toast';
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
-import BookingModal from '../Home/Products/BookingModal';
+import Loading from '../Loading/Loading';
+
 
 const SignUp = () => {
-    const { createSeller, updateUser } = useContext(AuthContext);
+    const { createSeller, updateUser, loading } = useContext(AuthContext);
     const navigate= useNavigate()
 
     const handleSignUp = event => {
@@ -14,6 +15,10 @@ const SignUp = () => {
         const userName = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
+
+if(loading){
+    return <Loading></Loading>
+}
 
         createSeller( email, password)
         .then(result=>{

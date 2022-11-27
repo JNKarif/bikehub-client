@@ -1,15 +1,20 @@
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
+import Loading from '../Loading/Loading';
 
 
 const Login = () => {
 
-    const { login } = useContext(AuthContext)
+    const { login, loading } = useContext(AuthContext)
     const location =useLocation()
     const navigate = useNavigate()
 
     const from =location.state?.from?.pathname || '/'
+
+if(loading){
+    return <Loading></Loading>
+}
 
     const handleLogin = event => {
         event.preventDefault()
