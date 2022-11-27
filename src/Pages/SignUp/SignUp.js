@@ -2,6 +2,7 @@ import { toast } from 'react-hot-toast';
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
+import BookingModal from '../Home/Products/BookingModal';
 
 const SignUp = () => {
     const { createSeller, updateUser } = useContext(AuthContext);
@@ -65,6 +66,7 @@ const SignUp = () => {
                     </div>
                 </div>
             </form>
+            
         </div>
     );
 };

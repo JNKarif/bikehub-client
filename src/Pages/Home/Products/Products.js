@@ -5,7 +5,7 @@ import Product from './Product';
 
 const Products = () => {
   const products = useLoaderData()
-const [bikeModel, setBikeModel]=useState(null)
+  const [bikeModel, setBikeModel] = useState(null)
 
 
   return (
@@ -16,9 +16,9 @@ const [bikeModel, setBikeModel]=useState(null)
 
         {
           products?.map(bike => <Product
-          key={bike._id}
+            key={bike._id}
             bike={bike}
-           setBikeModel={setBikeModel}
+            setBikeModel={setBikeModel}
           ></Product>)
         }
 
@@ -26,8 +26,8 @@ const [bikeModel, setBikeModel]=useState(null)
       {
         bikeModel &&
         <BookingModal
-      bikeModel={bikeModel}
-      ></BookingModal>
+          bikeModel={bikeModel}
+        ></BookingModal>
       }
     </div>
   );
