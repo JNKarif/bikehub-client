@@ -3,12 +3,20 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 import Loading from '../Loading/Loading';
+import { signInWithPopup } from 'firebase/auth';
 
 
 const SignUp = () => {
-    const { createSeller, updateUser, loading } = useContext(AuthContext);
+    const { createSeller, updateUser, loading, googleProvider } = useContext(AuthContext);
     const navigate= useNavigate()
 
+   
+    // const handleGoogleSignUp= () =>{
+    //     return signInWithPopup(auth, googleProvider)
+
+    // }
+
+   
     const handleSignUp = event => {
         event.preventDefault()
         const form = event.target;

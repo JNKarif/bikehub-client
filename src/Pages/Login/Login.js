@@ -1,3 +1,4 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
@@ -6,7 +7,7 @@ import Loading from '../Loading/Loading';
 
 const Login = () => {
 
-    const { login, loading } = useContext(AuthContext)
+    const { login, providerLogin,loading } = useContext(AuthContext)
     const location =useLocation()
     const navigate = useNavigate()
 
@@ -33,6 +34,17 @@ if(loading){
 
     }
 
+    const googleProvider = new GoogleAuthProvider()
+
+    const handleGoogleSignIn = () => {
+        providerLogin(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+            })
+            .catch(err => console.error(err))
+    }
+
     return (
 
         <div className='flex justify-center my-10'>
@@ -54,7 +66,8 @@ if(loading){
                     </div>
                     <p> New to Bike Hub ? <Link to='/signup' className='text-primary'>Sign Up</Link> </p>
                     <div className="form-control mt-6">
-                        <button className="btn btn-primary">Login</button>
+                        <button className="btn btn-primary mb-3">Login</button>
+                        <button onClick={handleGoogleSignIn} className="btn btn-primary">Login with Google</button>
                     </div>
 
                 </div>
