@@ -1,5 +1,8 @@
 Project name: Bike Hub
 Live site link: https://bikehub-3a5dd.web.app/
+Admin email: arif@khan.com
+Admin password: 123456 
+
 Functionality :
 1. Progrmming Language- JavaScript.
 2. Library - React
