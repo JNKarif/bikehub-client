@@ -36,7 +36,7 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                toast('User created successfully')
+                toast.success(`${userName} added as a seller  successfully`)
                 const userInfo = {
                     displayName: userName
                 }
@@ -77,6 +77,7 @@ const SignUp = () => {
                 console.log(user)
                 saveUser(user.displayName, user.email)
                 setCreatedUserEmail(user.email)
+                toast.success(`${user.displayName} added as a buyer/user successfully`)
                 // navigate('/')
             })
             .catch(err => console.error(err))

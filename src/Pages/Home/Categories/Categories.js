@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import Loading from '../../Loading/Loading';
-import Products from '../Products/Products';
+
 import Category from './Category';
 
 const Categories = () => {

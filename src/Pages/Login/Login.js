@@ -1,21 +1,28 @@
-import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
+import useToken from '../../Hooks/useToken';
 import Loading from '../Loading/Loading';
 
 
 const Login = () => {
 
     const { login, loading } = useContext(AuthContext)
-    const location =useLocation()
+
+    const [loginUserEmail, setLoginUserEmail] = useState('')
+    const [token] = useToken(loginUserEmail)
+
+    const location = useLocation()
     const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/'
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
-    const from =location.state?.from?.pathname || '/'
 
-if(loading){
-    return <Loading></Loading>
-}
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     const handleLogin = event => {
         event.preventDefault()
@@ -27,15 +34,16 @@ if(loading){
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                navigate(from, {replace:true})
+                setLoginUserEmail(email)
+
             })
             .catch(error => console.error(error))
         // console.log(email, password)
 
     }
 
-    
-   
+
+
 
     return (
 
@@ -59,7 +67,7 @@ if(loading){
                     <p> New to Bike Hub ? <Link to='/signup' className='text-primary'>Sign Up</Link> </p>
                     <div className="form-control mt-6">
                         <button className="btn btn-primary mb-3">Login</button>
-                        
+
                     </div>
 
                 </div>
