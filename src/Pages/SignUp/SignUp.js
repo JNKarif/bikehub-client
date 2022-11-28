@@ -54,7 +54,7 @@ const SignUp = () => {
 
     const saveUser = (userName, email) => {
         const user = { userName, email };
-        fetch('http://localhost:5000/users', {
+        fetch('https://bikehub-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Blog from "../../Pages/Blog/Blog";
+import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import Home from "../../Pages/Home/Home/Home";
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
             {
                 path: '/categories/:id',
                 element: <PrivateRoute> <Products></Products></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`)
+                loader: ({ params }) => fetch(`https://bikehub-server.vercel.app/categories/${params.id}`)
 
             },
             {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/allusers',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            },
+            {
+                path: '/dashboard/allsellers',
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
         ]
     }

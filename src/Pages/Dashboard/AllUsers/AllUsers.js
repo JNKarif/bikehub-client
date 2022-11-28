@@ -7,14 +7,14 @@ const AllUsers = () => {
     const { data: users=[], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users');
+            const res = await fetch('https://bikehub-server.vercel.app/users');
             const data = await res.json();
             return data;
         }
     })
 
 const handleMakeAdmin= id=>{
-    fetch(`http://localhost:5000/users/admin/${id}`,{
+    fetch(`https://bikehub-server.vercel.app/users/admin/${id}`,{
         method: 'PUT',
         headers:{
             authorization:`bearer ${localStorage.getItem('accessToken')}`
@@ -40,8 +40,7 @@ const handleMakeAdmin= id=>{
         <th>No.</th>
         <th>Name</th>
         <th>Email</th>
-        <th>Make Admin</th>
-        <th>Verify</th>
+        <th>Make Admin</th>   
         <th>Delete</th>
       </tr>
     </thead>
@@ -55,7 +54,6 @@ const handleMakeAdmin= id=>{
             <td>{user.userName}</td>
             <td>{user.email}</td>
             <td>{user?.role!=='admin' && <button onClick={()=>handleMakeAdmin(user?._id)} className='btn btn-xs btn-primary' type="">Admin</button>}</td>
-            <td><button className='btn btn-xs btn-accent' type="">Verify</button></td>
             <td><button className='btn btn-xs btn-warning' type="">Delete</button></td>
           </tr>)
      }

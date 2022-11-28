@@ -1,3 +1,15 @@
+Project name: Bike Hub
+Live site link: https://bikehub-3a5dd.web.app/
+Functionality :
+1. Progrmming Language- JavaScript.
+2. Library - React
+3. CSS framework - Tailwind css , daisyui
+4. Router - React router dom
+5. Authentication- Firebase
+6. DataBase - MongoDb
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
