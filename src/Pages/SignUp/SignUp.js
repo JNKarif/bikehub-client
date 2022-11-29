@@ -10,13 +10,13 @@ import useToken from '../../Hooks/useToken';
 
 const SignUp = () => {
     const { createSeller, updateUser, loading, providerLogin } = useContext(AuthContext);
-    
-    const [createdUserEmail, setCreatedUserEmail]=useState('')
-    const [token]=useToken(createdUserEmail)
+
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail)
     const navigate = useNavigate()
 
 
-    if(token){
+    if (token) {
         navigate('/')
     }
 
@@ -27,7 +27,9 @@ const SignUp = () => {
         const userName = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
+        const role = form.role.value;
 
+        console.log(userName, email, password, role)
         if (loading) {
             return <Loading></Loading>
         }
@@ -42,18 +44,21 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        saveUser(userName, email)
+                        saveUser(userName, email, role)
+                        console.log(userName,email, role,password)
                     })
                     .catch(err => console.error(err))
             })
             .catch(error => console.error(error))
 
-        // console.log(email, password, userName)
+        // console.log(email, password, userName, role)
+
+
     }
 
 
-    const saveUser = (userName, email) => {
-        const user = { userName, email };
+    const saveUser = (userName, email, role) => {
+        const user = { userName, email, role };
         fetch('https://bikehub-server.vercel.app/users', {
             method: 'POST',
             headers: {
@@ -75,7 +80,7 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                saveUser(user.displayName, user.email)
+                saveUser(user.displayName, user.email, user.role)
                 setCreatedUserEmail(user.email)
                 toast.success(`${user.displayName} added as a buyer/user successfully`)
                 // navigate('/')
@@ -83,14 +88,35 @@ const SignUp = () => {
             .catch(err => console.error(err))
     }
 
-    // get JWT in client side
-   
+
+
 
     return (
         <div className='flex justify-center my-10'>
             <form onSubmit={handleSignUp} className="card flex  w-full max-w-sm shadow-2xl bg-base-100">
                 <div className="card-body">
                     <h1 className="text-3xl font-bold">Sign Up</h1>
+
+
+
+
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Account Type</span>
+                        </label>
+                        <select name='role' className="select select-bordered">
+
+                            <option disabled >Pick one</option>
+
+                            <option >buyer </option>
+                            <option >seller </option>
+
+                        </select>
+
+                    </div>
+
+
+
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Name</span>
@@ -115,7 +141,8 @@ const SignUp = () => {
 
                     <div className="form-control mt-6">
                         <button className="btn btn-primary mb-3">Sign Up</button>
-                        <button onClick={handleGoogleSignIn} className="btn btn-primary">Continue With Googles</button>
+
+                        <button onClick={handleGoogleSignIn} className="btn btn-primary">Continue With Google</button>
                     </div>
                 </div>
             </form>
