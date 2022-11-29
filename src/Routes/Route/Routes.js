@@ -4,6 +4,8 @@ import Main from "../../Layout/Main";
 import Blog from "../../Pages/Blog/Blog";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
+import AddProduct from "../../Pages/Dashboard/Dashboard/Seller/AddProduct";
+import MyProducts from "../../Pages/Dashboard/Dashboard/Seller/MyProducts/MyProducts";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import Home from "../../Pages/Home/Home/Home";
 import PageNotFound from "../../Pages/Home/PageNotFound/PageNotFound";
@@ -12,6 +14,7 @@ import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 
 const router = createBrowserRouter([
@@ -62,6 +65,22 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/allsellers',
                 element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
+            },
+            {
+                path: '/dashboard/seller',
+                element: <AdminRoute><AddProduct></AddProduct></AdminRoute>
+            },
+            // {
+            //     path: '/dashboard/seller',
+            //     element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
+            // },
+            {
+                path: '/dashboard/seller',
+                element: <AddProduct></AddProduct>
+            },
+            {
+                path: '/dashboard/myproducts',
+                element: <MyProducts></MyProducts>
             },
         ]
     }

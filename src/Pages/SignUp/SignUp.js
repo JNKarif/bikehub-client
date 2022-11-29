@@ -104,11 +104,11 @@ const SignUp = () => {
                         <label className="label">
                             <span className="label-text">Account Type</span>
                         </label>
-                        <select name='role' className="select select-bordered">
+                        <select required name='role' className="select select-bordered">
 
-                            <option disabled >Pick one</option>
+                            <option disabled selected>Pick one</option>
 
-                            <option >buyer </option>
+                            <option defaultValue={{role:'buyer'}} >buyer </option>
                             <option >seller </option>
 
                         </select>

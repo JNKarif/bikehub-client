@@ -1,17 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
+import Loading from '../../Loading/Loading';
 
 const AllUsers = () => {
 
-    const { data: users=[], refetch } = useQuery({
+    const { data: users=[], refetch, isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await fetch('https://bikehub-server.vercel.app/users');
             const data = await res.json();
-            return data;
+            return data; 
         }
     })
+
+if(isLoading){
+    return <Loading></Loading>
+}
 
 const handleMakeAdmin= id=>{
     fetch(`https://bikehub-server.vercel.app/users/admin/${id}`,{

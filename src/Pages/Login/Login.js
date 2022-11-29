@@ -7,11 +7,11 @@ import Loading from '../Loading/Loading';
 
 const Login = () => {
 
-    const { login, loading } = useContext(AuthContext)
+    const { user, login, loading } = useContext(AuthContext)
 
     const [loginUserEmail, setLoginUserEmail] = useState('')
     const [token] = useToken(loginUserEmail)
-
+    const [seller, setSeller] = useState([])
     const location = useLocation()
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || '/'
@@ -24,6 +24,10 @@ const Login = () => {
         return <Loading></Loading>
     }
 
+    // if (user.role === 'seller') {
+
+    // }
+
     const handleLogin = event => {
         event.preventDefault()
         const form = event.target;
@@ -35,6 +39,12 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 setLoginUserEmail(email)
+                // if (user?.role === 'seller') {
+                //     setSeller([...seller, user])
+                // }
+                // else{
+                //     navigate('/login')
+                // }
 
             })
             .catch(error => console.error(error))

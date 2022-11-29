@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Context/AuthProvider';
+import Loading from '../../Loading/Loading';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext);
 
     const url = `https://bikehub-server.vercel.app/bookings?email=${user?.email}`
 
-    const { data: bookings = [] } = useQuery({
+    const { data: bookings = [], isLoading } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
@@ -19,6 +20,10 @@ const MyOrders = () => {
             return data
         }
     })
+
+if(isLoading){
+    return <Loading></Loading>
+}
 
     return (
         <div>

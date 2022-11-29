@@ -5,6 +5,8 @@ const [isAdmin, setIsAdmin]=useState(false);
 const [isAdminLoading, setIsAdminLoading]=useState(true)
 
 useEffect(()=>{
+
+    
 if(email){
     fetch(`https://bikehub-server.vercel.app/users/admin/${email}`)
     .then(res=>res.json())
