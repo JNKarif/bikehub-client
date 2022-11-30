@@ -30,11 +30,7 @@ if(isLoading){
             <div className='flex flex-row justify-between'>
                 <p className='text-3xl my-3'>My Orders</p>
                 <p className='text-xl text-secondary my-3'>Buyer: {user?.displayName}</p>
-                {/* <div className="avatar">
-                    <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                        <img src={user?.photoURL} alt='' />
-                    </div>
-                </div> */}
+                
             </div>
 
             <div className="overflow-x-auto ">

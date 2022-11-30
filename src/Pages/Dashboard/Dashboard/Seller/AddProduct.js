@@ -13,7 +13,13 @@ const AddProduct = () => {
     const { data: categories = [], isLoading } = useQuery({
         queryKey: ['productsCategory'],
         queryFn: async () => {
-            const res = await fetch('https://bikehub-server.vercel.app/productsCategory');
+        const res = await fetch('https://bikehub-server.vercel.app/productsCategory',
+        // {
+        //         headers:{
+        //             authorization:`bearer ${localStorage.getItem('accessToken')}`
+        //         }
+        //     }
+            );
             const data = await res.json();
             return data;
         }
@@ -68,7 +74,7 @@ const AddProduct = () => {
 
     return (
         <div>
-            <p>Seller route is coming soon</p>
+           
 
             <div className='flex justify-center my-10'>
                 <form onSubmit={handleAddProduct} className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">

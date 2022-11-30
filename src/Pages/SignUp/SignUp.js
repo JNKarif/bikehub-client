@@ -9,17 +9,19 @@ import useToken from '../../Hooks/useToken';
 
 
 const SignUp = () => {
-    const { createSeller, updateUser, loading, providerLogin } = useContext(AuthContext);
+    const { createSeller, updateUser, loading, providerLogin, user } = useContext(AuthContext);
 
-    const [createdUserEmail, setCreatedUserEmail] = useState('')
-    const [token] = useToken(createdUserEmail)
+    // const [createdUserEmail, setCreatedUserEmail] = useState('')
+    // const [token] = useToken(createdUserEmail)
     const navigate = useNavigate()
 
 
-    if (token) {
-        navigate('/')
-    }
-
+    // if (token) {
+    //     navigate('/')
+    // }
+if(user){
+    navigate('/')
+}
 
     const handleSignUp = event => {
         event.preventDefault()
@@ -42,9 +44,11 @@ const SignUp = () => {
                 const userInfo = {
                     displayName: userName
                 }
+            saveUser(userName, email, role)
+
                 updateUser(userInfo)
                     .then(() => {
-                        saveUser(userName, email, role)
+                       
                         console.log(userName,email, role,password)
                     })
                     .catch(err => console.error(err))
@@ -68,8 +72,9 @@ const SignUp = () => {
         })
             .then(res => res.json())
             .then(data => {
+                
                 console.log(data);
-                setCreatedUserEmail(email)
+                // setCreatedUserEmail(email)
             })
     }
 
@@ -81,9 +86,9 @@ const SignUp = () => {
                 const user = result.user;
                 console.log(user)
                 saveUser(user.displayName, user.email, user.role)
-                setCreatedUserEmail(user.email)
+                // setCreatedUserEmail(user.email)
                 toast.success(`${user.displayName} added as a buyer/user successfully`)
-                // navigate('/')
+                navigate('/')
             })
             .catch(err => console.error(err))
     }

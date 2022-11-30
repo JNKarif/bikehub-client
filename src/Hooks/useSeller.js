@@ -6,7 +6,7 @@ const useSeller = email => {
 
     useEffect(() => {
         if (email) {
-            fetch(`https://bikehub-server.vercel.app/users/seller/${email}`)
+            fetch(`https://bikehub-server.vercel.app/users/seller?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);

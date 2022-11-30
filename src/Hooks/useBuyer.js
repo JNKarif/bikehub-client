@@ -6,7 +6,7 @@ const [isBuyerLoading, setIsBuyerLoading]=useState(true)
 
 useEffect(()=>{
 if(email){
-    fetch(`https://bikehub-server.vercel.app/users/buyer/${email}`)
+    fetch(`https://bikehub-server.vercel.app/users/buyer?email=${email}`)
     .then(res=>res.json())
     .then(data=>{
         console.log(data);

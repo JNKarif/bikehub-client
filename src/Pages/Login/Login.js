@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
-import useToken from '../../Hooks/useToken';
+// import useToken from '../../Hooks/useToken';
 import Loading from '../Loading/Loading';
 
 
@@ -9,24 +9,27 @@ const Login = () => {
 
     const { user, login, loading } = useContext(AuthContext)
 
-    const [loginUserEmail, setLoginUserEmail] = useState('')
-    const [token] = useToken(loginUserEmail)
-    const [seller, setSeller] = useState([])
+    // const [loginUserEmail, setLoginUserEmail] = useState('')
+    // const [token] = useToken(loginUserEmail)
+
     const location = useLocation()
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || '/'
-    if (token) {
-        navigate(from, { replace: true });
-    }
+
+    // if (token) {
+    //     navigate(from, { replace: true });
+    // }
+
+    // if(user){
+
+    // }
 
 
     if (loading) {
         return <Loading></Loading>
     }
 
-    // if (user.role === 'seller') {
 
-    // }
 
     const handleLogin = event => {
         event.preventDefault()
@@ -38,14 +41,9 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                setLoginUserEmail(email)
-                // if (user?.role === 'seller') {
-                //     setSeller([...seller, user])
-                // }
-                // else{
-                //     navigate('/login')
-                // }
+                // setLoginUserEmail(email)
 
+                navigate(from, { replace: true });
             })
             .catch(error => console.error(error))
         // console.log(email, password)
