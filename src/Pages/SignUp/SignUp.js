@@ -85,7 +85,7 @@ if(user){
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                saveUser(user.displayName, user.email, user.role)
+                saveUser(user.displayName, user.email, 'buyer')
                 // setCreatedUserEmail(user.email)
                 toast.success(`${user.displayName} added as a buyer/user successfully`)
                 navigate('/')

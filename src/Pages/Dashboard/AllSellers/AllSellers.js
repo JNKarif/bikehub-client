@@ -10,7 +10,7 @@ import ActionModal from '../../Shared/ActionModal/ActionModal';
 const AllSellers = () => {
 
   const [deleteSeller, setDeleteSeller] = useState(null)
-  const { user } = useContext(AuthContext);
+  const { user, _id } = useContext(AuthContext);
   const closeModal = () => {
     setDeleteSeller(null)
   }
@@ -38,25 +38,21 @@ const AllSellers = () => {
   }
 
 
-  const handleDelete = seller => {
-    fetch(`https://bikehub-server.vercel.app/users/seller/${user?._id}`, {
-      method: 'DELETE',
-      headers:{
-        'content-type': 'application/json'
-      }
+  const handleDelete = ( seller) => {
+
+console.log(seller)
 
 
-
-      // headers: {
-      //   authorization: `bearer ${localStorage.getItem('accessToken')}`
-      // }
+    fetch(`https://bikehub-server.vercel.app/users/seller/${seller._id}`, {
+      method: 'DELETE'
+    
     })
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        if(data.deletedCount>0){
+        if (data.deletedCount > 0) {
           refetch()
-toast.success(`${user?.userName} deleted successfully`)
+          toast.success(`${seller?.userName} deleted successfully`)
         }
       })
   }
@@ -107,10 +103,10 @@ toast.success(`${user?.userName} deleted successfully`)
                 <td><button type="" className='btn btn-xs btn-success'> Verify</button></td>
 
                 {/* The button to open modal */}
-<label onClick={() => setDeleteSeller(seller)} htmlFor="action-modal" className="btn btn-xs btn-primary">Delete</label>
-               
+                <label onClick={() => setDeleteSeller(seller)} htmlFor="action-modal" className="btn btn-xs btn-primary">Delete</label>
+
               </tr>)
-              
+
             }
 
           </tbody>

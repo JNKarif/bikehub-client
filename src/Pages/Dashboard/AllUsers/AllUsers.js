@@ -1,35 +1,48 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../../Context/AuthProvider';
 import Loading from '../../Loading/Loading';
 
 const AllUsers = () => {
 
-    const { data: users=[], refetch, isLoading } = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            const res = await fetch('https://bikehub-server.vercel.app/users');
-            const data = await res.json();
-            return data; 
-        }
-    })
+    const {loading}=useContext(AuthContext)
+const [users,setUsers]= useState()
 
-if(isLoading){
+useEffect(()=>{
+    fetch('https://bikehub-server.vercel.app/users')
+    .then(res=>res.json())
+    .then(data=>setUsers(data))
+},[])
+
+
+
+
+    // const { data: users=[], refetch, isLoading } = useQuery({
+    //     queryKey: ['users'],
+    //     queryFn: async () => {
+    //         const res = await fetch('https://bikehub-server.vercel.app/users');
+    //         const data = await res.json();
+    //         return data; 
+    //     }
+    // })
+
+if(loading){
     return <Loading></Loading>
 }
 
 const handleMakeAdmin= id=>{
     fetch(`https://bikehub-server.vercel.app/users/admin/${id}`,{
-        method: 'PUT',
-        headers:{
-            authorization:`bearer ${localStorage.getItem('accessToken')}`
-        }
+        method: 'PUT'
+        // headers:{
+        //     authorization:`bearer ${localStorage.getItem('accessToken')}`
+        // }
     })
     .then(res=>res.json())
     .then(data=>{
         if(data.modifiedCount>0){
             toast.success('Admin Made Successfully')
-            refetch()
+            // refetch()
         }
     })
 }
