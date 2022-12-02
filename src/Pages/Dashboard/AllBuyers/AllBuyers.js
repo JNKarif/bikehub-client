@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState, } from 'react';
+import React, {  useContext, useEffect, useState, } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
+import Loading from '../../Loading/Loading';
+
 import ActionModal from '../../Shared/ActionModal/ActionModal';
 
 
@@ -14,13 +16,24 @@ const AllBuyers = () => {
   const closeModal = () => {
     setDeleteBuyer(null)
   }
+console.log(user)
+  
 
-  const url = `https://bikehub-server.vercel.app/users/buyer?email=${user?.email}`
+
+// const [buyers, setBuyers]=useState([]);
+
+// useEffect(()=>{
+//   fetch(`http://localhost:5000/users/buyer/buyer`)
+//   .then(res=>res.json())
+//   .then(data=>setBuyers(data))
+//   .catch(err=>console.error(err))
+// },[])
+
 
   const { data: buyers = [], isLoading , refetch} = useQuery({
-    queryKey: ['buyers', user?.email],
+    queryKey: ['/users/buyer/buyer'],
     queryFn: async () => {
-      const res = await fetch(url
+      const res = await fetch(`http://localhost:5000/users/buyer/buyer`);
 
         //   {
         //     headers:{
@@ -28,21 +41,21 @@ const AllBuyers = () => {
         //     }
         // }
 
-      );
+      
       const data = await res.json();
       return data
     }
   })
 
   if (isLoading) {
-    return
+    return <Loading></Loading>
   }
 
 
 
   const handleDelete = buyer => {
     console.log(buyer)
-    fetch(`https://bikehub-server.vercel.app/users/buyer/${buyer._id}`, {
+    fetch(`http://localhost:5000/users/buyer/${buyer._id}`, {
       method: 'DELETE'
     
     })

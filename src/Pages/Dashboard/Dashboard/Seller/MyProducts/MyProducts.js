@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../../Context/AuthProvider';
 import Loading from '../../../../Loading/Loading';
 
-const url = 'https://bikehub-server.vercel.app/products'
+const url = 'http://localhost:5000/products'
 
 const MyProducts = () => {
 

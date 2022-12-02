@@ -63,7 +63,7 @@ if(user){
 
     const saveUser = (userName, email, role) => {
         const user = { userName, email, role };
-        fetch('https://bikehub-server.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -85,7 +85,8 @@ if(user){
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                saveUser(user.displayName, user.email, 'buyer')
+                // saveUser(user.displayName, user.email, 'buyer')
+                saveUser(user.displayName, user.email, user.role)
                 // setCreatedUserEmail(user.email)
                 toast.success(`${user.displayName} added as a buyer/user successfully`)
                 navigate('/')
@@ -147,11 +148,11 @@ if(user){
                     <div className="form-control mt-6">
                         <button className="btn btn-primary mb-3">Sign Up</button>
 
-                        <button onClick={handleGoogleSignIn} className="btn btn-primary">Continue With Google</button>
+                        
                     </div>
                 </div>
             </form>
-
+            <button onClick={handleGoogleSignIn} className="btn btn-primary">Continue With Google</button>
         </div>
     );
 };

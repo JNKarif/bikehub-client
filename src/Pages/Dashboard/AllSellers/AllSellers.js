@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { success } from 'daisyui/src/colors';
 import React, { useContext, useState, } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
@@ -10,16 +9,17 @@ import ActionModal from '../../Shared/ActionModal/ActionModal';
 const AllSellers = () => {
 
   const [deleteSeller, setDeleteSeller] = useState(null)
-  const { user, _id } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
+  
   const closeModal = () => {
     setDeleteSeller(null)
   }
-  const url = `https://bikehub-server.vercel.app/users/seller?email=${user?.email}`
+  
 
   const { data: sellers = [], isLoading, refetch } = useQuery({
-    queryKey: ['sellers', user?.email],
+    queryKey: ['/users/seller/seller'],
     queryFn: async () => {
-      const res = await fetch(url,
+      const res = await fetch(`http://localhost:5000/users/seller/seller`);
 
         //   {
         //     headers:{
@@ -27,7 +27,7 @@ const AllSellers = () => {
         //     }
         // }
 
-      );
+    
       const data = await res.json();
       return data
     }
@@ -43,7 +43,7 @@ const AllSellers = () => {
 console.log(seller)
 
 
-    fetch(`https://bikehub-server.vercel.app/users/seller/${seller._id}`, {
+    fetch(`http://localhost:5000/users/seller/${seller._id}`, {
       method: 'DELETE'
     
     })
@@ -63,7 +63,7 @@ console.log(seller)
   // const [sellers, setSellers]=useState([]);
 
   // useEffect(()=>{
-  //   fetch('https://bikehub-server.vercel.app/users/seller',
+  //   fetch('http://localhost:5000/users/seller',
   //   headers:{
   //     authorization:`bearer ${localStorage.getItem('accessToken')}`
   // }

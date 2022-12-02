@@ -13,7 +13,7 @@ const AddProduct = () => {
     const { data: categories = [], isLoading } = useQuery({
         queryKey: ['productsCategory'],
         queryFn: async () => {
-        const res = await fetch('https://bikehub-server.vercel.app/productsCategory',
+        const res = await fetch('http://localhost:5000/productsCategory',
         // {
         //         headers:{
         //             authorization:`bearer ${localStorage.getItem('accessToken')}`
@@ -55,7 +55,7 @@ const AddProduct = () => {
         }
 
 
-        fetch('https://bikehub-server.vercel.app/products', {
+        fetch('http://localhost:5000/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -10,7 +10,7 @@ const AllUsers = () => {
 const [users,setUsers]= useState()
 
 useEffect(()=>{
-    fetch('https://bikehub-server.vercel.app/users')
+    fetch('http://localhost:5000/users')
     .then(res=>res.json())
     .then(data=>setUsers(data))
 },[])
@@ -21,7 +21,7 @@ useEffect(()=>{
     // const { data: users=[], refetch, isLoading } = useQuery({
     //     queryKey: ['users'],
     //     queryFn: async () => {
-    //         const res = await fetch('https://bikehub-server.vercel.app/users');
+    //         const res = await fetch('http://localhost:5000/users');
     //         const data = await res.json();
     //         return data; 
     //     }
@@ -32,7 +32,7 @@ if(loading){
 }
 
 const handleMakeAdmin= id=>{
-    fetch(`https://bikehub-server.vercel.app/users/admin/${id}`,{
+    fetch(`http://localhost:5000/users/admin/${id}`,{
         method: 'PUT'
         // headers:{
         //     authorization:`bearer ${localStorage.getItem('accessToken')}`

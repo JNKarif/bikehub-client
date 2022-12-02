@@ -14,6 +14,7 @@ import Products from "../../Pages/Home/Products/Products";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
             {
                 path: '/categories/:id',
                 element: <PrivateRoute> <Products></Products></PrivateRoute>,
-                loader: ({ params }) => fetch(`https://bikehub-server.vercel.app/categories/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/categories/${params.id}`)
 
             },
             {
@@ -55,10 +56,16 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
+
+            // #### Buyer roote
             {
-                path: '/dashboard',
-                element: <MyOrders></MyOrders>
+                path: '/dashboard/buyer',
+                element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
             },
+
+
+
+            //    ##### Admin only routes
             {
                 path: '/dashboard/allbuyers',
                 element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
@@ -71,22 +78,28 @@ const router = createBrowserRouter([
                 path: '/dashboard/allsellers',
                 element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
-            // {
-            //     path: '/dashboard/seller',
-            //     element: <AdminRoute><AddProduct></AddProduct></AdminRoute>
-            // },
-            // {
-            //     path: '/dashboard/seller',
-            //     element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
-            // },
+
+
+
+
+            // #####seller route
             {
                 path: '/dashboard/seller',
-                element: <AddProduct></AddProduct>
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
             {
                 path: '/dashboard/myproducts',
-                element: <MyProducts></MyProducts>
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
             },
+            // {
+            //     path: '/dashboard/seller',
+            //     element: <AddProduct></AddProduct>
+            // },
+            // {
+            //     path: '/dashboard/myproducts',
+            //     element: <MyProducts></MyProducts>
+            // },
+
         ]
     }
 ])
