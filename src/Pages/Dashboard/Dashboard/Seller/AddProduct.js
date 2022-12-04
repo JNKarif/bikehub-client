@@ -1,14 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../../Context/AuthProvider';
 import Loading from '../../../Loading/Loading';
 
 
 const AddProduct = () => {
 
     const navigate = useNavigate()
-
+const {user}=useContext(AuthContext)
 
     const { data: categories = [], isLoading } = useQuery({
         queryKey: ['productsCategory'],
@@ -39,6 +40,7 @@ const AddProduct = () => {
         const description= form.description.value;
         const mobile = form.mobile.value;
         const location = form.location.value;
+        
 
         // console.log(productName, condition,category, price, mobile, location)
 
@@ -50,7 +52,8 @@ const AddProduct = () => {
             price,
             description,
             mobile,
-            location
+            location,
+            email: user.email
 
         }
 

@@ -85,8 +85,8 @@ if(user){
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                // saveUser(user.displayName, user.email, 'buyer')
-                saveUser(user.displayName, user.email, user.role)
+                saveUser(user.displayName, user.email, 'buyer')
+                // saveUser(user.displayName, user.email, user.role)
                 // setCreatedUserEmail(user.email)
                 toast.success(`${user.displayName} added as a buyer/user successfully`)
                 navigate('/')
@@ -114,7 +114,7 @@ if(user){
 
                             <option disabled selected>Pick one</option>
 
-                            <option defaultValue={{role:'buyer'}} >buyer </option>
+                            <option >buyer </option>
                             <option >seller </option>
 
                         </select>

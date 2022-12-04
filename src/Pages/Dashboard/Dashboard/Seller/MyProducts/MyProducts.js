@@ -4,23 +4,24 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../../Context/AuthProvider';
 import Loading from '../../../../Loading/Loading';
 
-const url = 'http://localhost:5000/products'
+
 
 const MyProducts = () => {
 
  const {user}=useContext(AuthContext)
-
-    const { data: products = [], isLoading } = useQuery({
-        queryKey: ['products'],
+ const url = `http://localhost:5000/products?email=${user?.email}`
+    const { data: products = [], isLoading, refetch } = useQuery({
+        queryKey: ['products', user?.email],
         queryFn: async () => {
-            const res = await fetch(url, 
+            const res = await fetch(url)
             //     {
             //     headers:{
             //         authorization:`bearer ${localStorage.getItem('accessToken')}`
             //     }
             // }
-            );
+            // );
             const data = await res.json();
+            console.log(data)
             return data
         }
     })
@@ -47,14 +48,16 @@ const MyProducts = () => {
 
 //     }, [])
 
-// if(products){
-//     return refetch()
-// }
+// 
 
 if(isLoading){
     return <Loading></Loading>
     
 }
+
+// if(products){
+//         return refetch()
+//     }
 
    
 

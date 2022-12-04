@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider';
+import useBuyer from '../../../Hooks/useBuyer';
+import useSeller from '../../../Hooks/useSeller';
 
 const BookingModal = ({ bikeModel, setBikeModel }) => {
     const { name, resell_price } = bikeModel;
-    const { user } = useContext(AuthContext)
-
+    const { user, logOut } = useContext(AuthContext)
+    const [isSeller] = useSeller(user?.email)
 
     const handleBooking = event => {
         event.preventDefault();
@@ -16,7 +18,14 @@ const BookingModal = ({ bikeModel, setBikeModel }) => {
         const emailUser = form.userEmail.value;
         const bookedPrice = form.price.value;
 
-        const booking = {
+
+
+if(isSeller){
+    return logOut && toast.error('Please login from a buyer account or registered as buyer')
+}
+       
+
+const booking = {
             bike: name,
             buyer: nameUser,
             buyerLocation: location,

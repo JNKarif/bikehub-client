@@ -18,7 +18,7 @@ const DashboardLayout = () => {
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content ">
                     <Outlet></Outlet>
-
+<img className='w-[500px]' src="https://img.freepik.com/free-vector/web-development-programmer-engineering-coding-website-augmented-reality-interface-screens-developer-project-engineer-programming-software-application-design-cartoon-illustration_107791-3863.jpg?w=740&t=st=1669963966~exp=1669964566~hmac=f5e04ec4db2d481ff64b64daa9cc7b800de562dbd86bd0b00d9dd3e66697db94" alt=""/>
 
                 </div>
                 <div className="drawer-side">
