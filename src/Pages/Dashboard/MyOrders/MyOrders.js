@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 import Loading from '../../Loading/Loading';
 
@@ -12,8 +13,8 @@ const MyOrders = () => {
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
-                headers:{
-                    authorization:`bearer ${localStorage.getItem('accessToken')}`
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
             });
             const data = await res.json();
@@ -21,16 +22,16 @@ const MyOrders = () => {
         }
     })
 
-if(isLoading){
-    return <Loading></Loading>
-}
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div>
             <div className='flex flex-row justify-between'>
                 <p className='text-3xl my-3'>My Orders</p>
                 <p className='text-xl text-secondary my-3'>Buyer: {user?.displayName}</p>
-                
+
             </div>
 
             <div className="overflow-x-auto ">
@@ -56,7 +57,20 @@ if(isLoading){
                                 <td>{booking.bike}</td>
                                 <td>{booking.price}</td>
                                 <td>{booking.bookingDate}</td>
-                                <td>Blue</td>
+                                <td>
+                                    {
+                                        booking.price && !booking.paid && <Link to={`/dashboard/payment/${booking._id}`}>
+                                        <button type="" className='btn btn-xs'>Pay</button>
+                                        </Link>
+
+                                    }
+
+                                    {
+                                        booking.price && booking.paid && <button type="" className='btn btn-xs'>Paid</button>
+                                    }
+
+
+                                </td>
                             </tr>)
                         }
 

@@ -77,6 +77,7 @@ if(isLoading){
                     <thead>
                         <tr>
                             <th>No. </th>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Category</th>
                             <th>Condition</th>
@@ -95,6 +96,14 @@ if(isLoading){
                             products?.map((product, i) =>
                                 <tr key={product._id}>
                                     <th>{i + 1}</th>
+                                    <td>
+                                    <div className="avatar">
+  <div className="w-20 rounded">
+    <img src={product.image} alt="Tailwind-CSS-Avatar-component" />
+  </div>
+</div>
+
+                                    </td>
                                     <td>{product.productName}</td>
                                     <td>{product.category}</td>
                                     <td>{product.condition}</td>

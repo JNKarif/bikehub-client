@@ -9,17 +9,20 @@ import Loading from '../../../Loading/Loading';
 const AddProduct = () => {
 
     const navigate = useNavigate()
-const {user}=useContext(AuthContext)
+    const { user } = useContext(AuthContext)
+    // console.log(user)
+    const imageHostKey = process.env.REACT_APP_imgbb_key;
+    // console.log(imageHostKey)
 
     const { data: categories = [], isLoading } = useQuery({
         queryKey: ['productsCategory'],
         queryFn: async () => {
-        const res = await fetch('http://localhost:5000/productsCategory',
-        // {
-        //         headers:{
-        //             authorization:`bearer ${localStorage.getItem('accessToken')}`
-        //         }
-        //     }
+            const res = await fetch('http://localhost:5000/productsCategory',
+                // {
+                //         headers:{
+                //             authorization:`bearer ${localStorage.getItem('accessToken')}`
+                //         }
+                //     }
             );
             const data = await res.json();
             return data;
@@ -37,47 +40,73 @@ const {user}=useContext(AuthContext)
         const purhaseYear = form.year.value;
         const category = form.category.value;
         const price = form.price.value;
-        const description= form.description.value;
+        const description = form.description.value;
         const mobile = form.mobile.value;
         const location = form.location.value;
-        
 
-        // console.log(productName, condition,category, price, mobile, location)
-
-        const products = {
-            productName,
-            condition,
-            category,
-            purhaseYear,
-            price,
-            description,
-            mobile,
-            location,
-            email: user.email
-
-        }
-
-
-        fetch('http://localhost:5000/products', {
+        const photo = form.photo.files;
+        const image = photo[0]
+        const formData = new FormData();
+        formData.append('image', image)
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+        fetch(url, {
             method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(products)
+            body: formData
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                toast.success('Product added for sell successfully ')
-                navigate('/dashboard/myproducts')
+            .then(imgData => {
+                console.log(imgData)
+                if (imgData.success) {
+                    console.log(imgData.data.url)
+                    const products = {
+                        productName,
+                        condition,
+                        category,
+                        image: imgData.data.url,
+                        purhaseYear,
+                        price,
+                        description,
+                        mobile,
+                        location,
+                        email: user.email,
+                        seller: user.displayName,
+                        isVerified: user.emailVerified
+
+                    }
+
+
+                    fetch('http://localhost:5000/products', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(products)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            toast.success('Product added for sell successfully ')
+                            navigate('/dashboard/myproducts')
+                        })
+
+
+                }
             })
+
+        // console.log(photo[0])
+        // console.log(productName, condition,category, price, mobile, location)
+
+
+
+
+
 
 
     }
 
     return (
         <div>
-           
+
 
             <div className='flex justify-center my-10'>
                 <form onSubmit={handleAddProduct} className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -125,6 +154,14 @@ const {user}=useContext(AuthContext)
                                 <option >Good</option>
                                 <option >Fair</option>
                             </select>
+                        </div>
+
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Product Image</span>
+                            </label>
+                            <input name='photo' type='file' placeholder="Upload product image" required className="input input-bordered" />
                         </div>
 
 

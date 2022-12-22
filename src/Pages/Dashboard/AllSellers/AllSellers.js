@@ -8,7 +8,10 @@ import ActionModal from '../../Shared/ActionModal/ActionModal';
 
 const AllSellers = () => {
 
+const {user}=useContext(AuthContext)
+
   const [deleteSeller, setDeleteSeller] = useState(null)
+const [verify, setVerify]=useState(false)
   // const { user } = useContext(AuthContext);
   
   const closeModal = () => {
@@ -60,17 +63,29 @@ console.log(seller)
 
 
 
-  // const [sellers, setSellers]=useState([]);
+const handleVerify= id =>{
+  
+  fetch(`http://localhost:5000/users/seller/seller/${user._id}`,{
+    method: 'PUT'
+    // headers:{
+    //     authorization:`bearer ${localStorage.getItem('accessToken')}`
+    // }
+})
+.then(res=>res.json())
+.then(data=>{
+  setVerify(true)
+    // if(data.modifiedCount>0){
+    //     toast.success('Admin Made Successfully')
+    //     // refetch()
+    // }
+    if(verify){
+        toast.success('Seller verified Successfully')
+        // refetch()
+    }
 
-  // useEffect(()=>{
-  //   fetch('http://localhost:5000/users/seller',
-  //   headers:{
-  //     authorization:`bearer ${localStorage.getItem('accessToken')}`
-  // }
-  //   )
-  //   .then(res=>res.json())
-  //   .then(data=>setSellers(data))
-  // },[])
+
+})
+}
 
 
 
@@ -100,7 +115,7 @@ console.log(seller)
                 <th>{i + 1}</th>
                 <td>{seller.userName}</td>
                 <td>{seller.email}</td>
-                <td><button type="" className='btn btn-xs btn-success'> Verify</button></td>
+                <td><button onClick={()=>handleVerify(seller)} type="" className='btn btn-xs btn-success'> Verify</button></td>
 
                 {/* The button to open modal */}
                 <label onClick={() => setDeleteSeller(seller)} htmlFor="action-modal" className="btn btn-xs btn-primary">Delete</label>
